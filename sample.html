@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>datamaps.japan.js Sample</title>
+
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="http://d3js.org/topojson.v1.min.js" charset="utf-8"></script>
+<script src="datamaps.japan.min.js" charset="utf-8"></script>
+
+<script type="text/javascript">
+window.onload = function () {
+    var map;
+
+    map = new Datamap( {
+        element: document.getElementById("container"),
+        scope: "japan",
+        width: 800,
+        height: 800,
+        geographyConfig: {
+            borderColor: "#555"
+        },
+        setProjection: function () {
+            var projection, path;
+
+            projection = d3.geo.mercator()
+                .center( [ 137, 36 ] )
+                .translate( [ 800 / 2, 800 / 2 ] )
+                .scale( 800 * 2.2 );
+
+            path = d3.geo.path()
+                .projection( projection );
+
+            return { path: path, projection: projection };
+        }
+    });
+};
+</script>
+
+</head>
+
+<body>
+<div id="container" style="width: 800px; height: 800px; border: 1px solid #000;"></div>
+</body>
+
+</html>
